@@ -3,715 +3,1145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViralAI - Crayo-inspired AI Content Creation Platform</title>
+    <meta name="description" content="ViralAI - AI-powered content creation platform for generating viral scripts, voices, captions, and visuals for social media">
+    <title>ViralAI - AI Content Creation Platform for Viral Social Media Content</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    
+    <!-- Tailwind CSS with modern features -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #93c5fd 100%);
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
         }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Modern CSS features -->
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 1) 0%, rgba(59, 130, 246, 1) 50%, rgba(147, 197, 253, 1) 100%);
+        }
+        
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, rgba(12, 74, 110, 1) 0%, rgba(7, 89, 133, 1) 50%, rgba(2, 132, 199, 1) 100%);
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+        
         .video-preview:hover .play-button {
             opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .play-button {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .caption-animated {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        /* Modern scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .dark ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: #64748b;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
     </style>
 </head>
-<body class="font-sans bg-gray-50">
+<body class="font-sans bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-white focus:dark:bg-gray-800 focus:rounded-md focus:z-50">
+        Skip to content
+    </a>
+    
     <!-- Navbar -->
-    <nav class="bg-white shadow-sm">
+    <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/732ddb8a-1593-4414-9599-59bd1627fffa.png" alt="ViralAI logo - abstract blue wave symbol with gradient colors" class="h-8 w-auto">
-                        <span class="ml-2 text-xl font-bold text-gray-900">ViralAI</span>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/732ddb8a-1593-4414-9599-59bd1627fffa.png" 
+                             alt="ViralAI logo - abstract blue wave symbol with gradient colors" 
+                             class="h-8 w-auto"
+                             width="32"
+                             height="32">
+                        <span class="ml-2 text-xl font-bold text-gray-900 dark:text-white">ViralAI</span>
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="#features" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm font-medium">Features</a>
-                        <a href="#templates" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Templates</a>
-                        <a href="#pricing" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Pricing</a>
-                        <a href="#showcase" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Showcase</a>
+                        <a href="#features" class="text-gray-900 dark:text-white inline-flex items-center px-1 pt-1 border-b-2 border-primary-500 text-sm font-medium">Features</a>
+                        <a href="#templates" class="text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-300 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Templates</a>
+                        <a href="#pricing" class="text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-300 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Pricing</a>
+                        <a href="#showcase" class="text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-300 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Showcase</a>
                     </div>
                 </div>
-                <div class="hidden sm:ml-6 sm:flex sm:items-center">
-                    <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white gradient-bg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+                    <button id="theme-toggle" type="button" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500" aria-label="Toggle dark mode">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800">
                         Get Started
                     </button>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Menu open: "hidden", Menu closed: "block" -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Menu open: "block", Menu closed: "hidden" -->
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="hidden sm:hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#features" class="bg-primary-50 border-primary-500 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:bg-gray-700 dark:text-primary-200">Features</a>
+                <a href="#templates" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200">Templates</a>
+                <a href="#pricing" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200">Pricing</a>
+                <a href="#showcase" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200">Showcase</a>
+                <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center px-4 space-x-3">
+                        <button class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700">
+                            Get Started
+                        </button>
+                        <button id="mobile-theme-toggle" type="button" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg id="mobile-theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                            </svg>
+                            <svg id="mobile-theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="relative gradient-bg">
-        <div class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Create Viral Content with AI
-            </h1>
-            <p class="mt-6 max-w-3xl mx-auto text-xl text-blue-100">
-                Scripts, voices, captions, visuals - all generated automatically for maximum engagement on TikTok, YouTube, and Instagram.
-            </p>
-            <div class="mt-10 flex justify-center">
-                <div class="inline-flex rounded-md shadow">
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50">
-                        Try For Free
-                    </a>
-                </div>
-                <div class="ml-3 inline-flex">
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 bg-opacity-60 hover:bg-opacity-70">
-                        Watch Demo
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- AI Script Generator -->
-    <div id="script-generator" class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    AI Script Generator
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Input a topic and get a viral-worthy script in seconds.
+    <main id="main-content">
+        <section class="relative gradient-bg overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1a3a6e2e-9a2b-4e2d-8c1a-3b8c9d6e2f1a.png')] bg-cover bg-center mix-blend-overlay opacity-10 dark:opacity-5"></div>
+            <div class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8 text-center relative">
+                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                    <span class="block">Create Viral Content</span>
+                    <span class="block bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100">With AI Power</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-blue-100">
+                    Scripts, voices, captions, visuals - all generated automatically for maximum engagement on TikTok, YouTube, and Instagram.
                 </p>
-            </div>
-
-            <div class="mt-10">
-                <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                    <div class="bg-gray-50 rounded-lg p-6">
-                        <div class="space-y-4">
-                            <div>
-                                <label for="topic" class="block text-sm font-medium text-gray-700">Topic or Keyword</label>
-                                <input type="text" id="topic" name="topic" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm h-10 px-3" placeholder="Enter topic (e.g., '5 productivity hacks for students')">
-                            </div>
-                            <div>
-                                <label for="style" class="block text-sm font-medium text-gray-700">Style</label>
-                                <select id="style" name="style" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm h-10">
-                                    <option>Engaging Story</option>
-                                    <option>List Style</option>
-                                    <option>Reddit Style</option>
-                                    <option>Educational</option>
-                                    <option>Shocking Facts</option>
-                                </select>
-                            </div>
-                            <button id="generate-script" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md">  
-                                Generate Script
+                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                    <div class="inline-flex rounded-md shadow">
+                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-blue-50 transition-colors duration-200">
+                            Try For Free
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 -mr-1 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="inline-flex">
+                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 bg-opacity-80 hover:bg-opacity-90 transition-opacity duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 -ml-1 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Watch Demo
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="mt-16 mx-auto max-w-4xl">
+                    <div class="relative rounded-xl overflow-hidden shadow-xl">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1152ca2-0eae-4ae3-964e-3c8dbab4fe49.png" 
+                                 alt="Dashboard preview showing ViralAI interface with content creation tools" 
+                                 class="object-cover w-full h-full"
+                                 loading="lazy">
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button class="play-button bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-4 opacity-90">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                </svg>
+                                <span class="sr-only">Play video</span>
                             </button>
                         </div>
                     </div>
-                    <div class="bg-gray-900 rounded-lg p-6 text-white">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-lg font-medium">Generated Script Preview</h3>
-                            <button class="text-blue-400 hover:text-blue-300 text-sm font-medium">
-                                Copy to Clipboard
-                            </button>
-                        </div>
-                        <div class="mt-4 bg-gray-800 p-4 rounded-md font-mono text-sm h-64 overflow-y-auto">
-                            <!-- AI-generated script will appear here -->
-                            <p>Start with a shocking statement: "98% of students are using these study techniques wrong..."</p>
-                            <p class="mt-2">Introduce first tip with a personal anecdote: "When I was failing my freshman year..."</p>
-                            <p class="mt-2">Present the 5 techniques with scientific backing for each one</p>
-                            <p class="mt-2">End with a call to action: "Try tip #3 today and watch your productivity double!"</p>
-                        </div>
+                </div>
+            </div>
+            
+            <!-- Floating elements for visual interest -->
+            <div class="absolute top-1/4 left-10 w-16 h-16 rounded-full bg-white bg-opacity-10 animate-float animation-delay-100"></div>
+            <div class="absolute top-1/3 right-20 w-24 h-24 rounded-full bg-white bg-opacity-5 animate-float animation-delay-300"></div>
+            <div class="absolute bottom-1/4 left-1/4 w-20 h-20 rounded-full bg-white bg-opacity-7 animate-float animation-delay-500"></div>
+        </section>
+
+        <!-- Logo Cloud -->
+        <section class="py-12 bg-white dark:bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-sm font-semibold uppercase text-gray-500 dark:text-gray-400 tracking-wide">
+                    Trusted by creators at
+                </p>
+                <div class="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
+                    <div class="col-span-1 flex justify-center">
+                        <img class="h-12 dark:brightness-0 dark:invert" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3a1b6c2d-4e5f-4a3b-9c8d-7e6f5a4b3c2d.png" alt="Tiktok logo" loading="lazy">
+                    </div>
+                    <div class="col-span-1 flex justify-center">
+                        <img class="h-12 dark:brightness-0 dark:invert" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b3c2d1e-5f6a-4b3c-9d8e-7f6a5b4c3d2e.png" alt="YouTube logo" loading="lazy">
+                    </div>
+                    <div class="col-span-1 flex justify-center">
+                        <img class="h-12 dark:brightness-0 dark:invert" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5c4d3e2f-6a5b-4c3d-9e8f-7a6b5c4d3e2f.png" alt="Instagram logo" loading="lazy">
+                    </div>
+                    <div class="col-span-1 flex justify-center">
+                        <img class="h-12 dark:brightness-0 dark:invert" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6d5e4f3a-7b6c-4d5e-9f8a-8b7c6d5e4f3a.png" alt="Reddit logo" loading="lazy">
+                    </div>
+                    <div class="col-span-1 flex justify-center">
+                        <img class="h-12 dark:brightness-0 dark:invert" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7e6f5a4b-8c7d-5e6f-9a8b-9c8d7e6f5a4b.png" alt="Twitter logo" loading="lazy">
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- AI Voice Narrator -->
-    <div id="voice-narrator" class="py-12 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    AI Voice Narrator
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Choose from 100+ human-like voices in 20+ languages.
-                </p>
-            </div>
-
-            <div class="mt-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Voice Sample 1 -->
-                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                        <div class="flex items-center">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e7f69a9e-f163-4c75-bee5-5471623403dc.png" alt="Profile picture of young male voice actor with short brown hair and friendly expression" class="rounded-full h-12 w-12">
-                            <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Male - Alex</h3>
-                                <p class="text-sm text-gray-500">American English</p>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-sm text-gray-600">"Studious yet approachable tone perfect for educational content."</p>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center">
-                            <audio controls class="w-full">
-                                <source src="#" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                        <button class="mt-3 w-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium py-1.5 px-4 rounded-md text-sm">
-                            Select Voice
-                        </button>
-                    </div>
-
-                    <!-- Voice Sample 2 -->
-                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                        <div class="flex items-center">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4afc4193-3e96-4b77-bfab-69aa8ed4fbef.png" alt="Profile picture of mature female voice actor with professional makeup and headset" class="rounded-full h-12 w-12">
-                            <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Female - Sophia</h3>
-                                <p class="text-sm text-gray-500">British English</p>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-sm text-gray-600">"Sophisticated and engaging for professional presentations."</p>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center">
-                            <audio controls class="w-full">
-                                <source src="#" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                        <button class="mt-3 w-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium py-1.5 px-4 rounded-md text-sm">
-                            Select Voice
-                        </button>
-                    </div>
-
-                    <!-- Voice Sample 3 -->
-                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                        <div class="flex items-center">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/723b0c2e-9b68-425e-9ff0-a07cb6088954.png" alt="Profile picture of animated character voice actor with lively expression and colorful background" class="rounded-full h-12 w-12">
-                            <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Character - Buzz</h3>
-                                <p class="text-sm text-gray-500">Dynamic & Energetic</p>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-sm text-gray-600">"High-energy voice perfect for gaming and entertainment content."</p>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center">
-                            <audio controls class="w-full">
-                                <source src="#" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                        <button class="mt-3 w-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium py-1.5 px-4 rounded-md text-sm">
-                            Select Voice
-                        </button>
-                    </div>
+        <!-- AI Script Generator -->
+        <section id="script-generator" class="py-12 bg-gray-50 dark:bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                        AI Script Generator
+                    </h2>
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 lg:mx-auto">
+                        Input a topic and get a viral-worthy script in seconds.
+                    </p>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Auto Captions & Visual Effects -->
-    <div id="captions-effects" class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    Auto Captions & Visual Effects
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Automatically generated captions with engaging animations.
-                </p>
-            </div>
-
-            <div class="mt-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div>
-                        <div class="bg-black rounded-lg overflow-hidden">
-                            <div class="relative pt-[56.25%]">
-                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1152ca2-0eae-4ae3-964e-3c8dbab4fe49.png" alt="Video preview showing auto-generated captions with dynamic text animations synced to voiceover" class="absolute top-0 left-0 w-full h-full object-cover">
-                                <div class="absolute bottom-4 left-0 right-0 px-4">
-                                    <div class="bg-black bg-opacity-70 px-3 py-2 rounded">
-                                        <p class="text-white font-medium text-center caption-animated">98% of students use these techniques WRONG</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="space-y-6">
-                            <div>
-                                <h3 class="text-lg font-medium text-gray-900">Caption Styles</h3>
-                                <div class="mt-4 grid grid-cols-2 gap-3">
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Standard</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Typewriter</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Bounce</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Highlight</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Slide In</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Gradient</button>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-medium text-gray-900">Visual Effects</h3>
-                                <div class="mt-4 grid grid-cols-3 gap-3">
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Glitch</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Zoom</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">VHS</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Particle</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Neon</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white hover:bg-gray-50">Glow</button>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-medium text-gray-900">Customize</h3>
-                                <div class="mt-4 space-y-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Text Color</label>
-                                        <input type="color" class="mt-1 block h-10 w-full rounded-md" value="#ffffff">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Background Color</label>
-                                        <input type="color" class="mt-1 block h-10 w-full rounded-md" value="#000000">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Font Size</label>
-                                        <input type="range" min="12" max="72" value="24" class="mt-1 block w-full">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- AI Image & Video Generator -->
-    <div id="image-video-gen" class="py-12 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    AI Image & Video Generator
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Generate stunning visuals from text prompts.
-                </p>
-            </div>
-
-            <div class="mt-10">
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <div class="grid grid-cols-1 lg:grid-cols-2">
-                        <div class="p-6">
+                <div class="mt-10">
+                    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
                             <div class="space-y-4">
                                 <div>
-                                    <label for="prompt" class="block text-sm font-medium text-gray-700">Prompt</label>
-                                    <textarea id="prompt" name="prompt" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="Describe the image or video you want to generate (e.g., 'A futuristic city at sunset with flying cars')"></textarea>
+                                    <label for="topic" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Topic or Keyword</label>
+                                    <input type="text" id="topic" name="topic" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10 px-3" placeholder="Enter topic (e.g., '5 productivity hacks for students')">
                                 </div>
                                 <div>
-                                    <label for="style" class="block text-sm font-medium text-gray-700">Style</label>
-                                    <select id="style" name="style" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                                        <option>Realistic</option>
-                                        <option>Cartoon</option>
-                                        <option>Anime</option>
-                                        <option>3D Render</option>
-                                        <option>Watercolor</option>
-                                        <option>Pixel Art</option>
+                                    <label for="style" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Style</label>
+                                    <select id="style" name="style" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10">
+                                        <option>Engaging Story</option>
+                                        <option>List Style</option>
+                                        <option>Reddit Style</option>
+                                        <option>Educational</option>
+                                        <option>Shocking Facts</option>
                                     </select>
                                 </div>
-                                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md">
-                                    Generate
+                                <div>
+                                    <label for="tone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tone</label>
+                                    <select id="tone" name="tone" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10">
+                                        <option>Friendly</option>
+                                        <option>Professional</option>
+                                        <option>Humorous</option>
+                                        <option>Dramatic</option>
+                                        <option>Inspirational</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="length" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Length</label>
+                                    <select id="length" name="length" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10">
+                                        <option>Short (15-30 sec)</option>
+                                        <option>Medium (30-60 sec)</option>
+                                        <option>Long (1-2 min)</option>
+                                    </select>
+                                </div>
+                                <button id="generate-script" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                    <svg id="loading-spinner" class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Generate Script
                                 </button>
                             </div>
                         </div>
-                        <div class="bg-gray-100 p-6 flex items-center justify-center">
-                            <div class="relative w-full h-64 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/568de87f-583f-4157-8a40-50516eaa7782.png" alt="AI generated image placeholder - should show a futuristic cityscape with flying cars at sunset, highly detailed cinematic style" class="absolute inset-0 w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                                    <span class="text-white font-medium">Generated output will appear here</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Content Library -->
-    <div id="library" class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    Content Library
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Organized templates and assets for every platform.
-                </p>
-            </div>
-
-            <div class="mt-10">
-                <div class="border-b border-gray-200">
-                    <nav class="-mb-px flex space-x-8 overflow-x-auto">
-                        <a href="#" class="whitespace-nowrap py-4 px-1 border-b-2 border-blue-500 font-medium text-sm text-blue-600">All</a>
-                        <a href="#" class="whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">TikTok</a>
-                        <a href="#" class="whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">YouTube</a>
-                        <a href="#" class="whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">Instagram</a>
-                        <a href="#" class="whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">Reddit</a>
-                        <a href="#" class="whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">Ads</a>
-                    </nav>
-                </div>
-
-                <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- Template 1 -->
-                    <div class="group relative">
-                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden bg-gray-200">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2df9cdb-1308-49f8-8bed-867026421128.png" alt="TikTok template with split screen showing before/after transformation with bold captions" class="w-full h-full object-cover group-hover:opacity-75">
-                        </div>
-                        <div class="mt-2">
-                            <h3 class="text-sm font-medium text-gray-900">TikTok - Before/After</h3>
-                            <p class="text-xs text-gray-500">3M uses</p>
-                        </div>
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-center justify-center">
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md text-sm">
-                                Use Template
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Template 2 -->
-                    <div class="group relative">
-                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden bg-gray-200">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/92907248-0b5c-4165-899b-663135dbdce5.png" alt="YouTube thumbnail template with shocked expression and bright red text on yellow background" class="w-full h-full object-cover group-hover:opacity-75">
-                        </div>
-                        <div class="mt-2">
-                            <h3 class="text-sm font-medium text-gray-900">YouTube - Shocking Facts</h3>
-                            <p class="text-xs text-gray-500">1.5M uses</p>
-                        </div>
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-center justify-center">
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md text-sm">
-                                Use Template
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Template 3 -->
-                    <div class="group relative">
-                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden bg-gray-200">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bbd71f6d-801b-45db-92fc-6375af861e32.png" alt="Reddit story visualization with animated text over black and white city background" class="w-full h-full object-cover group-hover:opacity-75">
-                        </div>
-                        <div class="mt-2">
-                            <h3 class="text-sm font-medium text-gray-900">Reddit Stories</h3>
-                            <p class="text-xs text-gray-500">2.2M uses</p>
-                        </div>
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-center justify-center">
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md text-sm">
-                                Use Template
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Template 4 -->
-                    <div class="group relative">
-                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden bg-gray-200">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8833786d-beda-4f89-be0c-206e69044581.png" alt="Product review template with floating 3D product render and score counter animation" class="w-full h-full object-cover group-hover:opacity-75">
-                        </div>
-                        <div class="mt-2">
-                            <h3 class="text-sm font-medium text-gray-900">Product Reviews</h3>
-                            <p class="text-xs text-gray-500">890K uses</p>
-                        </div>
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-center justify-center">
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md text-sm">
-                                Use Template
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Downloader Section -->
-    <div id="downloader" class="py-12 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    YouTube & TikTok Downloader
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Download and remix content in one click.
-                </p>
-            </div>
-
-            <div class="mt-10">
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <div class="p-6">
-                        <div class="flex mb-4">
-                            <div class="flex-1">
-                                <label for="video-url" class="block text-sm font-medium text-gray-700">Video URL</label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                                    <input type="text" id="video-url" name="video-url" class="focus:ring-blue-500 focus:border-blue-500 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 h-10 px-3" placeholder="Paste YouTube or TikTok link">
-                                    <button class="inline-flex items-center px-4 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm h-10">
-                                        Paste
+                        <div class="bg-gray-900 rounded-lg p-6 text-white shadow-lg">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-medium">Generated Script Preview</h3>
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                        </svg>
+                                        Copy
+                                    </button>
+                                    <button class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                        Download
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="border border-gray-200 rounded-md p-4">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                        <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="text-sm font-medium text-gray-900">Download Options</h3>
-                                        <p class="text-xs text-gray-500">Video, Audio, or Captions</p>
-                                    </div>
-                                </div>
-                                <div class="mt-4 grid grid-cols-2 gap-2">
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Video HD</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Video 720p</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Audio Only</button>
-                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Subtitles</button>
-                                </div>
+                            <div class="mt-4 bg-gray-800 p-4 rounded-md font-mono text-sm h-64 overflow-y-auto">
+                                <!-- AI-generated script will appear here -->
+                                <p class="text-blue-300">[Opening Hook]</p>
+                                <p class="mt-2">"98% of students are using these study techniques WRONG - and it's costing them hours of wasted time every week!"</p>
+                                
+                                <p class="mt-4 text-blue-300">[Personal Anecdote]</p>
+                                <p class="mt-2">"When I was failing my freshman year, I discovered one simple change that doubled my productivity overnight..."</p>
+                                
+                                <p class="mt-4 text-blue-300">[Technique 1]</p>
+                                <p class="mt-2">"1. The Pomodoro Method - but with a twist: 25 minutes on, 5 minutes off is outdated. New research shows 52 minutes of focused work followed by 17 minutes of rest is the optimal cycle for retention."</p>
+                                
+                                <p class="mt-4 text-blue-300">[Technique 2]</p>
+                                <p class="mt-2">"2. Active Recall: Instead of re-reading notes, test yourself immediately after learning. This increases retention by up to 70% according to a 2022 Harvard study."</p>
+                                
+                                <p class="mt-4 text-blue-300">[Call to Action]</p>
+                                <p class="mt-2">"Try technique #2 today and watch your productivity double! Which of these surprised you the most? Drop a comment below!"</p>
                             </div>
-                            <div class="border border-gray-200 rounded-md p-4">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
-                                        <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="text-sm font-medium text-gray-900">Quick Remix</h3>
-                                        <p class="text-xs text-gray-500">Auto-crop for different platforms</p>
-                                    </div>
-                                </div>
-                                <div class="mt-4 grid grid-cols-3 gap-2">
-                                    <button class="px-2 py-1 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">TikTok</button>
-                                    <button class="px-2 py-1 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Reels</button>
-                                    <button class="px-2 py-1 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Shorts</button>
-                                    <button class="px-2 py-1 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Add Captions</button>
-                                    <button class="px-2 py-1 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Voiceover</button>
-                                    <button class="px-2 py-1 border border-gray-300 rounded-md text-xs font-medium bg-white hover:bg-gray-50">Clean Audio</button>
-                                </div>
+                            <div class="mt-4 flex justify-end">
+                                <button class="text-sm bg-primary-600 hover:bg-primary-700 text-white font-medium py-1.5 px-3 rounded-md transition-colors duration-200">
+                                    Generate Voiceover
+                                </button>
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md">
-                                Process Video
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Voice Narrator -->
+        <section id="voice-narrator" class="py-12 bg-white dark:bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                        AI Voice Narrator
+                    </h2>
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 lg:mx-auto">
+                        Choose from 100+ human-like voices in 20+ languages.
+                    </p>
+                </div>
+
+                <div class="mt-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Voice Sample 1 -->
+                        <div class="feature-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-6">
+                            <div class="flex items-center">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e7f69a9e-f163-4c75-bee5-5471623403dc.png" 
+                                     alt="Profile picture of young male voice actor with short brown hair and friendly expression" 
+                                     class="rounded-full h-12 w-12"
+                                     width="48"
+                                     height="48"
+                                     loading="lazy">
+                                <div class="ml-4">
+                                    <h3 class="font-medium text-gray-900 dark:text-white">Male - Alex</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">American English</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-sm text-gray-600 dark:text-gray-300">"Studious yet approachable tone perfect for educational content."</p>
+                            </div>
+                            <div class="mt-4">
+                                <div class="relative">
+                                    <div class="h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500" style="width: 70%"></div>
+                                    </div>
+                                    <audio controls class="w-full mt-3">
+                                        <source src="#" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary-50 hover:bg-primary-100 dark:bg-gray-600 dark:hover:bg-gray-500 text-primary-600 dark:text-primary-300 font-medium py-1.5 px-4 rounded-md text-sm transition-colors duration-200 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Select Voice
+                            </button>
+                        </div>
+
+                        <!-- Voice Sample 2 -->
+                        <div class="feature-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-6">
+                            <div class="flex items-center">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4afc4193-3e96-4b77-bfab-69aa8ed4fbef.png" 
+                                     alt="Profile picture of mature female voice actor with professional makeup and headset" 
+                                     class="rounded-full h-12 w-12"
+                                     width="48"
+                                     height="48"
+                                     loading="lazy">
+                                <div class="ml-4">
+                                    <h3 class="font-medium text-gray-900 dark:text-white">Female - Sophia</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">British English</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-sm text-gray-600 dark:text-gray-300">"Sophisticated and engaging for professional presentations."</p>
+                            </div>
+                            <div class="mt-4">
+                                <div class="relative">
+                                    <div class="h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500" style="width: 85%"></div>
+                                    </div>
+                                    <audio controls class="w-full mt-3">
+                                        <source src="#" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary-50 hover:bg-primary-100 dark:bg-gray-600 dark:hover:bg-gray-500 text-primary-600 dark:text-primary-300 font-medium py-1.5 px-4 rounded-md text-sm transition-colors duration-200 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Select Voice
+                            </button>
+                        </div>
+
+                        <!-- Voice Sample 3 -->
+                        <div class="feature-card bg-white dark:bg-gray-700 rounded-lg shadow-md p-6">
+                            <div class="flex items-center">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/723b0c2e-9b68-425e-9ff0-a07cb6088954.png" 
+                                     alt="Profile picture of animated character voice actor with lively expression and colorful background" 
+                                     class="rounded-full h-12 w-12"
+                                     width="48"
+                                     height="48"
+                                     loading="lazy">
+                                <div class="ml-4">
+                                    <h3 class="font-medium text-gray-900 dark:text-white">Character - Buzz</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Dynamic & Energetic</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-sm text-gray-600 dark:text-gray-300">"High-energy voice perfect for gaming and entertainment content."</p>
+                            </div>
+                            <div class="mt-4">
+                                <div class="relative">
+                                    <div class="h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500" style="width: 60%"></div>
+                                    </div>
+                                    <audio controls class="w-full mt-3">
+                                        <source src="#" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary-50 hover:bg-primary-100 dark:bg-gray-600 dark:hover:bg-gray-500 text-primary-600 dark:text-primary-300 font-medium py-1.5 px-4 rounded-md text-sm transition-colors duration-200 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Select Voice
                             </button>
                         </div>
                     </div>
+                    
+                    <div class="mt-8 text-center">
+                        <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800 transition-colors duration-200">
+                            View All Voices
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 -mr-1 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Viral Workflow -->
-    <div id="workflow" class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    Streamlined Viral Workflow
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    From idea to viral in minutes.
-                </p>
-            </div>
+        <!-- Auto Captions & Visual Effects -->
+        <section id="captions-effects" class="py-12 bg-gray-50 dark:bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                        Auto Captions & Visual Effects
+                    </h2>
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 lg:mx-auto">
+                        Automatically generated captions with engaging animations.
+                    </p>
+                </div>
 
-            <div class="mt-10">
-                <div class="relative">
-                    <div class="hidden md:block absolute top-0 left-1/2 h-full w-0.5 bg-gray-200"></div>
-                    
-                    <div class="space-y-10">
-                        <!-- Step 1 -->
-                        <div class="relative md:flex">
-                            <div class="md:w-1/2 md:pr-12 md:text-right">
-                                <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white">
-                                    <span class="text-lg font-bold">1</span>
+                <div class="mt-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <div class="bg-black rounded-lg overflow-hidden shadow-xl">
+                                <div class="relative pt-[56.25%]">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1152ca2-0eae-4ae3-964e-3c8dbab4fe49.png" 
+                                         alt="Video preview showing auto-generated captions with dynamic text animations synced to voiceover" 
+                                         class="absolute top-0 left-0 w-full h-full object-cover"
+                                         loading="lazy">
+                                    <div class="absolute bottom-4 left-0 right-0 px-4">
+                                        <div class="bg-black bg-opacity-70 px-3 py-2 rounded backdrop-blur-sm">
+                                            <p class="text-white font-medium text-center caption-animated animate-pulse">98% of students use these techniques WRONG</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h3 class="mt-2 text-lg font-medium text-gray-900">Generate Script</h3>
-                                <p class="mt-1 text-base text-gray-500">
-                                    Input your topic and get an optimized script with viral hooks.
-                                </p>
                             </div>
-                            <div class="mt-8 md:mt-0 md:w-1/2 md:pl-12">
-                                <div class="bg-gray-100 rounded-lg p-6 h-32 flex items-center justify-center">
-                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6fa68141-92b2-46e2-a56e-7d3547d3b24c.png" alt="Interface showing AI script generation with optimized hooks and structure indicators" class="rounded-lg">
-                                </div>
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <button class="px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium">
+                                    Generate Preview
+                                </button>
+                                <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    Download Video
+                                </button>
                             </div>
                         </div>
-
-                        <!-- Step 2 -->
-                        <div class="relative md:flex md:flex-row-reverse">
-                            <div class="md:w-1/2 md:pl-12">
-                                <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white">
-                                    <span class="text-lg font-bold">2</span>
+                        <div>
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Caption Styles</h3>
+                                    <div class="mt-4 grid grid-cols-3 gap-3">
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center">
+                                            <span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+                                            Standard
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center">
+                                            <span class="w-3 h-3 rounded-full bg-purple-500 mr-2"></span>
+                                            Typewriter
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center">
+                                            <span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                                            Bounce
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center">
+                                            <span class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                                            Highlight
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center">
+                                            <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                                            Slide In
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center">
+                                            <span class="w-3 h-3 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 mr-2"></span>
+                                            Gradient
+                                        </button>
+                                    </div>
                                 </div>
-                                <h3 class="mt-2 text-lg font-medium text-gray-900">Add Voiceover</h3>
-                                <p class="mt-1 text-base text-gray-500">
-                                    Select from 100+ human-like voices or upload your own.
-                                </p>
-                            </div>
-                            <div class="mt-8 md:mt-0 md:w-1/2 md:pr-12">
-                                <div class="bg-gray-100 rounded-lg p-6 h-32 flex items-center justify-center">
-                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/17cbda30-4bf6-4db6-bf30-a7c4d019de24.png" alt="Voice selection panel showing multiple voice options with preview buttons" class="rounded-lg">
+                                <div>
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Visual Effects</h3>
+                                    <div class="mt-4 grid grid-cols-3 gap-3">
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                            Glitch
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                            Zoom
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                            VHS
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                            Particle
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                            Neon
+                                        </button>
+                                        <button class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                            Glow
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div class="relative md:flex">
-                            <div class="md:w-1/2 md:pr-12 md:text-right">
-                                <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white">
-                                    <span class="text-lg font-bold">3</span>
-                                </div>
-                                <h3 class="mt-2 text-lg font-medium text-gray-900">Generate Visuals</h3>
-                                <p class="mt-1 text-base text-gray-500">
-                                    Create AI images/videos or use our template library.
-                                </p>
-                            </div>
-                            <div class="mt-8 md:mt-0 md:w-1/2 md:pl-12">
-                                <div class="bg-gray-100 rounded-lg p-6 h-32 flex items-center justify-center">
-                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c582981-d23b-4bb3-a297-dfcf77fb1945.png" alt="AI image generation interface showing various style options and text prompt input" class="rounded-lg">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 4 -->
-                        <div class="relative md:flex md:flex-row-reverse">
-                            <div class="md:w-1/2 md:pl-12">
-                                <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white">
-                                    <span class="text-lg font-bold">4</span>
-                                </div>
-                                <h3 class="mt-2 text-lg font-medium text-gray-900">Auto Captions & Effects</h3>
-                                <p class="mt-1 text-base text-gray-500">
-                                    Add dynamic captions that sync with your voiceover.
-                                </p>
-                            </div>
-                            <div class="mt-8 md:mt-0 md:w-1/2 md:pr-12">
-                                <div class="bg-gray-100 rounded-lg p-6 h-32 flex items-center justify-center">
-                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e61d5e67-9bd3-4a8e-9d1a-538a7cb37802.png" alt="Caption editor showing text animation options and timing controls" class="rounded-lg">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 5 -->
-                        <div class="relative md:flex">
-                            <div class="md:w-1/2 md:pr-12 md:text-right">
-                                <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white">
-                                    <span class="text-lg font-bold">5</span>
-                                </div>
-                                <h3 class="mt-2 text-lg font-medium text-gray-900">Export & Share</h3>
-                                <p class="mt-1 text-base text-gray-500">
-                                    Multiple platform formats with one-click publishing.
-                                </p>
-                            </div>
-                            <div class="mt-8 md:mt-0 md:w-1/2 md:pl-12">
-                                <div class="bg-gray-100 rounded-lg p-6 h-32 flex items-center justify-center">
-                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5ff8f214-d182-42c3-85a8-2ab1eebc0ec3.png" alt="Export options for TikTok, YouTube, Instagram with format presets" class="rounded-lg">
+                                <div>
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Customize</h3>
+                                    <div class="mt-4 space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Text Color</label>
+                                            <div class="mt-1 flex items-center space-x-2">
+                                                <input type="color" class="block h-10 w-16 rounded-md cursor-pointer" value="#ffffff">
+                                                <input type="text" class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10 px-3" value="#FFFFFF">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Background Color</label>
+                                            <div class="mt-1 flex items-center space-x-2">
+                                                <input type="color" class="block h-10 w-16 rounded-md cursor-pointer" value="#000000">
+                                                <input type="text" class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10 px-3" value="#000000">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Font Size</label>
+                                            <input type="range" min="12" max="72" value="24" class="mt-1 block w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer">
+                                            <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                <span>Small</span>
+                                                <span>Medium</span>
+                                                <span>Large</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- CTA Section -->
-    <div class="gradient-bg">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                <span class="block">Ready to go viral?</span>
-                <span class="block text-blue-100">Start creating today.</span>
-            </h2>
-            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-                <div class="inline-flex rounded-md shadow">
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50">
-                        Get Started
-                    </a>
+        <!-- AI Image & Video Generator -->
+        <section id="image-video-gen" class="py-12 bg-white dark:bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                        AI Image & Video Generator
+                    </h2>
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 lg:mx-auto">
+                        Generate stunning visuals from text prompts.
+                    </p>
                 </div>
-                <div class="ml-3 inline-flex">
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 bg-opacity-60 hover:bg-opacity-70">
-                        Live Demo
+
+                <div class="mt-10">
+                    <div class="bg-white dark:bg-gray-700 rounded-lg shadow overflow-hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-2">
+                            <div class="p-6">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="prompt" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Prompt</label>
+                                        <textarea id="prompt" name="prompt" rows="4" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm" placeholder="Describe the image or video you want to generate (e.g., 'A futuristic city at sunset with flying cars')"></textarea>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="style" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Style</label>
+                                            <select id="style" name="style" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10">
+                                                <option>Realistic</option>
+                                                <option>Cartoon</option>
+                                                <option>3D Render</option>
+                                                <option>Watercolor</option>
+                                                <option>Pixel Art</option>
+                                                <option>Cyberpunk</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="aspect-ratio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Aspect Ratio</label>
+                                            <select id="aspect-ratio" name="aspect-ratio" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm h-10">
+                                                <option>16:9 (Widescreen)</option>
+                                                <option>9:16 (Vertical)</option>
+                                                <option>1:1 (Square)</option>
+                                                <option>4:5 (Portrait)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                        </svg>
+                                        Generate Visuals
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-800 p-6 flex items-center justify-center">
+                                <div class="grid grid-cols-2 gap-4 w-full">
+                                    <div class="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8f7a6b5c-9d8e-7f6a-5b4c-3d2e1f0a9b8c.png" 
+                                             alt="AI generated image of a futuristic city with flying cars at sunset" 
+                                             class="object-cover w-full h-full"
+                                             loading="lazy">
+                                    </div>
+                                    <div class="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9e8d7c6b-5a4b-3c2d-1e0f-9a8b7c6d5e4f.png" 
+                                             alt="AI generated image of a cyberpunk street with neon signs" 
+                                             class="object-cover w-full h-full"
+                                             loading="lazy">
+                                    </div>
+                                    <div class="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
+                                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d.png" 
+                                             alt="AI generated image of a cartoon-style futuristic city" 
+                                             class="object-cover w-full h-full"
+                                             loading="lazy">
+                                    </div>
+                                    <div class="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
+                                        <div class="text-center p-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                            </svg>
+                                            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Generate more</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-12 bg-gray-50 dark:bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                        Trusted by Content Creators
+                    </h2>
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 lg:mx-auto">
+                        Join thousands of creators boosting their content with AI.
+                    </p>
+                </div>
+
+                <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e.png" 
+                                 alt="Profile picture of Sarah Johnson, lifestyle content creator" 
+                                 class="rounded-full h-12 w-12"
+                                 width="48"
+                                 height="48"
+                                 loading="lazy">
+                            <div class="ml-4">
+                                <h3 class="font-medium text-gray-900 dark:text-white">Sarah Johnson</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Lifestyle Creator</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600 dark:text-gray-300">"ViralAI has cut my content creation time in half while doubling my engagement. The AI scripts are so good my followers think I hired a writer!"</p>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex text-yellow-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">5.0</span>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2c3d4e5f-6a7b-8c9d-0e1f-2a3b4c5d6e7f.png" 
+                                 alt="Profile picture of Mark Rodriguez, tech reviewer" 
+                                 class="rounded-full h-12 w-12"
+                                 width="48"
+                                 height="48"
+                                 loading="lazy">
+                            <div class="ml-4">
+                                <h3 class="font-medium text-gray-900 dark:text-white">Mark Rodriguez</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Tech Reviewer</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600 dark:text-gray-300">"The AI voice generator is indistinguishable from human narration. I've stopped hiring voice actors completely since discovering ViralAI."</p>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex text-yellow-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">5.0</span>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f8g.png" 
+                                 alt="Profile picture of Lisa Chen, marketing agency owner" 
+                                 class="rounded-full h-12 w-12"
+                                 width="48"
+                                 height="48"
+                                 loading="lazy">
+                            <div class="ml-4">
+                                <h3 class="font-medium text-gray-900 dark:text-white">Lisa Chen</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Marketing Agency</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600 dark:text-gray-300">"We've scaled our client content production 5x without adding staff. ViralAI's templates and automation are game-changers for agencies."</p>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex text-yellow-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">5.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="gradient-bg py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                    Ready to create viral content?
+                </h2>
+                <p class="mt-4 max-w-3xl mx-auto text-xl text-blue-100">
+                    Join thousands of creators boosting their engagement with AI-powered content.
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-blue-50 transition-colors duration-200">
+                        Start Free Trial
+                    </a>
+                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 bg-opacity-80 hover:bg-opacity-90 transition-opacity duration-200">
+                        Schedule Demo
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-            <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <footer class="bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Product</h3>
+                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">
+                        Product
+                    </h3>
                     <ul class="mt-4 space-y-4">
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Features</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Templates</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Pricing</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Changelog</a></li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Features
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Templates
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Pricing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                API
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Resources</h3>
+                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">
+                        Resources
+                    </h3>
                     <ul class="mt-4 space-y-4">
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Blog</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Tutorials</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Case Studies</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">API</a></li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Documentation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Guides
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Support
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">
+                        Company
+                    </h3>
                     <ul class="mt-4 space-y-4">
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">About</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Careers</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Privacy</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Terms</a></li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Careers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Privacy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Terms
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Connect</h3>
+                    <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">
+                        Connect
+                    </h3>
                     <ul class="mt-4 space-y-4">
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Twitter</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Discord</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Instagram</a></li>
-                        <li><a href="#" class="text-base text-gray-300 hover:text-white">YouTube</a></li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Twitter
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                TikTok
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                                YouTube
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 border-t border-gray-700 pt-8">
-                <p class="text-base text-gray-400 text-center">
-                    © 2023 ViralAI. All rights reserved.
+            <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/732ddb8a-1593-4414-9599-59bd1627fffa.png" 
+                         alt="ViralAI logo" 
+                         class="h-8 w-auto"
+                         width="32"
+                         height="32">
+                    <span class="ml-2 text-xl font-bold text-gray-900 dark:text-white">ViralAI</span>
+                </div>
+                <p class="mt-4 md:mt-0 text-base text-gray-500 dark:text-gray-400">
+                    &copy; 2023 ViralAI. All rights reserved.
                 </p>
             </div>
         </div>
     </footer>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const generateButton = document.getElementById('generate-script');
-    if (generateButton) {
-        generateButton.addEventListener('click', function() {
-            const topic = document.getElementById('topic').value;
-            if (topic) {
-                const scriptPreview = document.querySelector('.bg-gray-800 .font-mono');
-                if (scriptPreview) {
-                    scriptPreview.innerHTML = `
-                        <p>Opening hook: "You won't believe what happens when ${topic.toLowerCase()}..."</p>
-                        <p class="mt-2">Main content with 3 key points about ${topic.toLowerCase()}</p>
-                        <p class="mt-2">Controversial statement to spark engagement</p>
-                        <p class="mt-2">Call to action: "Like & follow for part 2!"</p>
-                    `;
-                }
-            }
-        });
-    }
-});
-</script>
 
+    <!-- Dark mode toggle script -->
+    <script>
+        // Check for dark mode preference at the OS level
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Get the theme toggle buttons
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        
+        // Get the theme toggle icons
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const mobileDarkIcon = document.getElementById('mobile-theme-toggle-dark-icon');
+        const mobileLightIcon = document.getElementById('mobile-theme-toggle-light-icon');
+        
+        // Check localStorage for theme preference
+        const currentTheme = localStorage.getItem('theme');
+        
+        // If the current theme in localStorage is "dark" or OS preference is dark and no theme set...
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.documentElement.classList.add('dark');
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+            mobileDarkIcon.classList.add('hidden');
+            mobileLightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+            mobileDarkIcon.classList.remove('hidden');
+            mobileLightIcon.classList.add('hidden');
+        }
+        
+        // Listen for clicks on the theme toggle buttons
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                toggleTheme();
+            });
+        }
+        
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', function() {
+                toggleTheme();
+            });
+        }
+        
+        function toggleTheme() {
+            // Toggle the .dark class on the html element
+            document.documentElement.classList.toggle('dark');
+            
+            // Update icons and localStorage based on current theme
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                darkIcon.classList.add('hidden');
+                lightIcon.classList.remove('hidden');
+                mobileDarkIcon.classList.add('hidden');
+                mobileLightIcon.classList.remove('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+                mobileDarkIcon.classList.remove('hidden');
+                mobileLightIcon.classList.add('hidden');
+            }
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('[aria-controls="mobile-menu"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', function() {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !expanded);
+                mobileMenu.classList.toggle('hidden');
+                
+                // Toggle the icons
+                const menuIcon = this.querySelector('.block');
+                const closeIcon = this.querySelector('.hidden');
+                menuIcon.classList.toggle('hidden');
+                menuIcon.classList.toggle('block');
+                closeIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('block');
+            });
+        }
+        
+        // Script generation simulation
+        const generateScriptButton = document.getElementById('generate-script');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        
+        if (generateScriptButton && loadingSpinner) {
+            generateScriptButton.addEventListener('click', function() {
+                // Show loading spinner
+                this.disabled = true;
+                loadingSpinner.classList.remove('hidden');
+                
+                // Simulate API call
+                setTimeout(() => {
+                    this.disabled = false;
+                    loadingSpinner.classList.add('hidden');
+                    
+                    // Here you would typically update the script preview with the generated content
+                    // For demo purposes, we'll just show an alert
+                    alert('Script generated successfully! Check the preview panel.');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
-
