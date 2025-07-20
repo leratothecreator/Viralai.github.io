@@ -99,7 +99,8 @@
                                     <option>Shocking Facts</option>
                                 </select>
                             </div>
-                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md">
+                            <button id="generate-script" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md">
+                            </button>
                                 Generate Script
                             </button>
                         </div>
@@ -690,30 +691,28 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Simple script for demo purposes
-        document.addEventListener('DOMContentLoaded', function() {
-            // Script generation demo
-            const generateButton = document.querySelector('button:contains("Generate Script")');
-            if (generateButton) {
-                generateButton.addEventListener('click', function() {
-                    const topic = document.getElementById('topic').value;
-                    if (topic) {
-                        const scriptPreview = document.querySelector('.bg-gray-800 .font-mono');
-                        if (scriptPreview) {
-                            scriptPreview.innerHTML = `
-                                <p>Opening hook: "You won't believe what happens when ${topic.toLowerCase()}..."</p>
-                                <p class="mt-2">Main content with 3 key points about ${topic.toLowerCase()}</p>
-                                <p class="mt-2">Controversial statement to spark engagement</p>
-                                <p class="mt-2">Call to action: "Like & follow for part 2!"</p>
-                            `;
-                        }
-                    }
-                });
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const generateButton = document.getElementById('generate-script');
+    if (generateButton) {
+        generateButton.addEventListener('click', function() {
+            const topic = document.getElementById('topic').value;
+            if (topic) {
+                const scriptPreview = document.querySelector('.bg-gray-800 .font-mono');
+                if (scriptPreview) {
+                    scriptPreview.innerHTML = `
+                        <p>Opening hook: "You won't believe what happens when ${topic.toLowerCase()}..."</p>
+                        <p class="mt-2">Main content with 3 key points about ${topic.toLowerCase()}</p>
+                        <p class="mt-2">Controversial statement to spark engagement</p>
+                        <p class="mt-2">Call to action: "Like & follow for part 2!"</p>
+                    `;
+                }
             }
         });
-    </script>
+    }
+});
+</script>
+
 </body>
 </html>
 
